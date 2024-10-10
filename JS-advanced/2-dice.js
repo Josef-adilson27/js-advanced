@@ -20,9 +20,7 @@ function getRandomDice() {
 function returnNumber(param) {
   return param in acceptDices
     ? Math.ceil(Math.random() * acceptDices[param])
-    : `Упс... увы, кость "${param}" неправильная. Вам доступны следующие значения: ${Object.keys(
-        acceptDices
-      ).join(", ")}`;
+    : `Упс... увы, кость "${param}" неправильная. Вам доступны следующие значения: ${Object.keys(acceptDices).join(", ")}`;
 }
 
 const randomDice = getRandomDice();
