@@ -1,30 +1,18 @@
-
-
 //функция валлидации возраста. Если больше 14 вернуть false иначе true
 
-function ageValidation(date) {
+function ageValidation(birthDate) {
+  const today = new Date();
+  const birthDateObj = new Date(birthDate);
 
-  let data = "";
+  let age = today.getFullYear() - birthDateObj.getFullYear();
+  const monthDifference = today.getMonth() - birthDateObj.getMonth();
 
-  //если формат анг. то конвертируем в русс. 
-
-  (date.includes("/"))?
-  data = date.split("/").reverse().join("-"):
-  data = date;
-  
-
-  const [YY, MM, DD] = data.split("-");
-
-  const difference = (new Date().getTime() - new Date(YY, MM, DD).getTime()) /(1000 * 60 * 60 * 24 * 30 * 12);
-  
-  return Math.floor(difference)>14? true : false
-   
+  //Корректировка возраста  на месяцы - наступил ли еще в этом году день рождение
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDateObj.getDate())) {
+    age--;
+  }  
+  return age > 14 ? true : false
 }
 
-console.log(ageValidation("2022-11-09")) ///false
-console.log(ageValidation("1996-11-09")) ///true
-
-
-console.log(ageValidation("09/11/2022")) ///false
-console.log(ageValidation("09/11/1996")) ///true
-
+console.log(ageValidation("10/07/2019")); //false
+console.log(ageValidation("1996-11-09")); //true
