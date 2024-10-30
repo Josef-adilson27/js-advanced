@@ -2,16 +2,15 @@ class Billing {
   constructor(amount) {
     this.amount = amount;
   }
-
-  CalculateTotal() {}
+  calculateTotal() {
+    return this.amount
+  }
 }
 
+
 class FixedBilling extends Billing {
-  constructor(amount) {
-    super(amount);
-  }
-  CalculateTotal() {
-    return this.amount;
+  calculateTotal() {
+    return super.calculateTotal();
   }
 }
 
@@ -21,7 +20,7 @@ class HourBilling extends Billing {
     super(amount);
     this.hours = hours;
   }
-  CalculateTotal() {
+  calculateTotal() {
     return this.amount * this.hours;
   }
 }
@@ -32,20 +31,18 @@ class ItemBilling extends Billing {
       super(amount);
       this.items = items;
     }
-    CalculateTotal() {
+    calculateTotal() {
       return this.amount * this.items;
     }
   }
   
-
-  const hourBilling = new HourBilling(3000, 24);
-  console.log(hourBilling.CalculateTotal());
-
-
   const fixedBilling = new FixedBilling(3000);
-  console.log(fixedBilling.CalculateTotal());
+  console.log(fixedBilling.calculateTotal());
   
+  const hourBilling = new HourBilling(3000, 24);
+  console.log(hourBilling.calculateTotal());
+
 
   const itemBilling = new ItemBilling(3000, 84);
-  console.log(itemBilling.CalculateTotal());
+  console.log(itemBilling.calculateTotal());
   
